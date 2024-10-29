@@ -74,6 +74,8 @@ CREATE TABLE BILETY (
 );
 
 
+
+
 INSERT INTO `SPRZEDAWCY` (`ID`, `IMIE`, `NAZWISKO`) VALUES 
 (NULL, 'Jan', 'Bogucki'),
 (NULL,'Michał', 'Więcek'),
@@ -88,9 +90,51 @@ INSERT INTO `SALE` (`ID`, `ILOSC_MIEJSC`) VALUES
 (NULL, 145),
 (NULL, 50);
 
+INSERT INTO `FILMY` (`ID`, `TYTUL`, `REZYSER`, `CZAS_TRWANIA_MIN`) VALUES 
+(NULL, 'Straszny Film', ' Malcolm D. Lee, Keenen Ivory Wayans, David Zucker', 122),
+(NULL, 'Szybcy i Wściekli : Tokio Drift', 'ustin Lin', 102),
+(NULL, 'Tuż po zmroku', 'Benjamin Brewer', 291),
+(NULL, 'Civil War', 'Alex Garland', 212),
+(NULL, 'Diabeł z Przodkowa', 'Cypek', 123);
+
 INSERT INTO `KLIENCI` (`ID`, `IMIE`, `NAZWISKO`, `MAIL`) VALUES 
-(NULL, `Janusz`, `Męczykowski`, `janusz.meczykowski@wp.pl`),
-(NULL, `Jarosław`, `Kuc`, `jarekcuk@wp.pl`),
-(NULL, `Andrzej`),
-(NULL, 145),
-(NULL, 50);
+(NULL, 'Janusz', 'Męczykowski', 'janusz.meczykowski@wp.pl'),
+(NULL, 'Jarosław', 'Kuc', 'jarekcuk@wp.pl'),
+(NULL, 'Andrzej', 'Robinson', 'andrei2@o2.pl'),
+(NULL, 'Piotr','Jaszczur', 'detka@grzybno.pl'),
+(NULL, 'Kacper', 'Malinowski', 'malinakapi320@gmail.com');
+
+
+INSERT INTO `RODZAJ_FILMU` (`ID`, `NAZWA`) VALUES 
+(NULL, 'Horror'),
+(NULL, 'Komedia'),
+(NULL, 'Romantyczny'),
+(NULL, 'Obyczajowy'),
+(NULL, 'Akcji');
+
+INSERT INTO `FILMY_RODZAJ` (`ID`, `NAZWA`) VALUES 
+(NULL, 1, 1),
+(NULL, 2, 5),
+(NULL, 3, 1),
+(NULL, 4, 5),
+(NULL, 5, 1);
+
+
+INSERT INTO `SEANSE` (`ID`, `TERMIN`, `SALA_ID`, `FILM_ID`, `LICZBA_WOLNYCH_MIEJSC`) VALUES 
+(NULL, "2024-12-13 20:23:44", 3, 2, 95 ),
+(NULL, "2024-12-14 22:27:14", 4, 1, 20 ),
+(NULL, "2024-12-15 19:23:34", 1, 3, 25 ),
+(NULL, "2024-12-16 13:15:59", 2, 5, 70 ),
+(NULL, "2024-10-15 14:25:50", 5, 4, 12 );
+
+INSERT INTO `BILETY` (`ID`, `SEANS_ID`, `SPRZEDAWCA_ID`, `KLIENT_ID`, `CENA`) VALUES 
+(NULL, 1, 2, 4, 25),
+(NULL, 3, 3, 5, 17),
+(NULL, 2, 1, 1, 21),
+(NULL, 5, 5, 2, 12),
+(NULL, 4, 4, 3, 43);
+
+
+SELECT FILMY_RODZAJ.ID, FILMY.TYTUL, RODZAJ_FILMU.NAZWA
+FROM FILMY_RODZAJ INNER JOIN FILMY ON FILMY_RODZAJ.FILMY_ID = FILMY.ID INNER JOIN RODZAJ_FILMU ON FILMY_RODZAJ.ID = RODZAJ_FILMU.ID GROUP BY FILMY.TYTUL
+ORDER BY RODZAJ_FILMU.NAZWA  ASC;
