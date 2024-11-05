@@ -9,11 +9,76 @@ header {
     display: flex;
     background-color: goldenrod;
     color: black;
-    align-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 footer {
     background-color: goldenrod;
     color: black;
     text-align: center;
+}
+
+#formularz {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5vw;
+}
+
+#webcenter {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.choose {
+    margin: 5px;
+    background-color: red;
+    border-radius: 30%;
+    border-color: black;
+    color: white;
+}
+
+#text {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    header {
+        display: flex;
+        background-color: goldenrod;
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    footer {
+        background-color: goldenrod;
+        color: black;
+        text-align: center;
+        flex-wrap: wrap;
+        width: 100vw;
+    }
+    #formularz {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5vw;
+        flex-wrap: wrap;
+    }
+    #webcenter {
+        flex-wrap: wrap;
+        width: 100vw;
+        height: 100vh;
+    }
 }
