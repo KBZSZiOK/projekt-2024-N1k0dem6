@@ -3,12 +3,13 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    display: flex;
 }
 
 header {
+    display: flex;
     background-color: goldenrod;
     color: black;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -16,8 +17,6 @@ footer {
     background-color: goldenrod;
     color: black;
     text-align: center;
-    display: flex;
-    position: fixed;
 }
 
 #formularz {
@@ -33,7 +32,6 @@ footer {
     background-color: black;
     color: white;
     display: flex;
-    flex-wrap: wrap;
 }
 
 .choose {
@@ -45,24 +43,11 @@ footer {
 }
 
 #text {
+    background-color: black;
+    color: white;
+    display: flex;
     align-items: flex-end;
     justify-content: center;
-}
-
-nav {
-    display: flex;
-    position: fixed;
-}
-
-#tableView {
-    display: flex;
-    width: 50%;
-}
-
-#forms {
-    display: flex;
-    width: 50%;
-    color: white;
 }
 
 @media only screen and (max-width: 600px) {
@@ -75,6 +60,7 @@ nav {
         display: flex;
         background-color: goldenrod;
         color: black;
+        display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
     }
@@ -97,21 +83,12 @@ nav {
         width: 100vw;
         height: 100vh;
     }
-    #text {
-        align-items: flex-end;
-        justify-content: center;
-    }
-    nav {
-        display: flex;
-        position: fixed;
-    }
-    #tableView {
-        display: flex;
-        width: 50%;
-    }
-    #forms {
-        display: flex;
-        width: 50%;
-        color: white;
-    }
+}
+
+#tableView,
+#forms {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }

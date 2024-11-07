@@ -189,18 +189,37 @@ $conn->close();
 ?> 
         </div>
         <div id="forms">
+          <p><b>UWAGA! Pierwsze 100 osób, które się zarejestrują mają 3 seanse w cenie 1.</b></p><br>
             <form method="post">
                 Podaj imię:<input type="text" name="name"><br>
                 Podaj nazwisko:<input type="text" name="surname"><br>
                 Podaj adres e-mail:<input type="email" name="mail"><br>
+                <button type="submit" name="action2" value="button2">Prześlij</button>
             </form>
-            <input type="submit" value="Prześlij">
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "kino4tigr1";
+            
+            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+              }
+              
+              if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                  if ($_POST['action'] == 'button2') {
+                    # code...
+                  }
+              }
+              $conn->close();
+            ?>
         </div>
-        <div id="text">
+        </section>
+        <section id="text">
             <p>Jesteśmy niedawno otworzonym kinem ,w którym można doznać dreszczyku emocji, ponieważ specjalizujemy się głównie w emitowaniu horrorów &#128561; &#128561; &#128561;</p>
-        </div>
-    </section>
-
+        </section>
     <footer><b>©KINO YASON 2024</b></footer>
 
 </body>
