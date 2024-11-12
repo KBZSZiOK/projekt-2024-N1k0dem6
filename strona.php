@@ -83,7 +83,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Filmy rodzaj:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>FILMY_ID</th><th>RODZAJ_ID</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['FILMY_ID']}</td><td>{$row['RODZAJ_ID']}</td></tr>";
@@ -101,7 +101,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Klienci:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>Imię</th><th>Nazwisko</th><th>E-mail</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['IMIE']}</td><td>{$row['NAZWISKO']}</td><td>{$row['MAIL']}</td></tr>";
@@ -119,7 +119,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Rodzaj filmu:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>Nazwa</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['NAZWA']}</td></tr>";
@@ -137,7 +137,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Sale:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>Ilość miejsc</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['ILOSC_MIEJSC']}</td></tr>";
@@ -155,7 +155,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Seanse:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>Termin</th><th>ID sali</th><th>ID filmu</th><th>Liczba wolnych miejsc</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['TERMIN']}</td><td>{$row['SALA_ID']}</td><td>{$row['FILM_ID']}</td><td>{$row['LICZBA_WOLNYCH_MIEJSC']}</td></tr>";
@@ -173,7 +173,7 @@ if (!$conn) {
     
 
     if ($result->num_rows > 0) {
-      echo "<h2>Filmy:</h2>";
+      echo "<h2>Sprzedawcy:</h2>";
       echo "<table border='1'><tr><th>ID</th><th>Imię</th><th>Nazwisko</th></tr>";
       while ($row = $result->fetch_assoc()) {
           echo "<tr><td>{$row['ID']}</td><td>{$row['IMIE']}</td><td>{$row['NAZWISKO']}</td></tr>";
@@ -194,6 +194,7 @@ $conn->close();
                 Podaj imię:<input type="text" name="name"><br>
                 Podaj nazwisko:<input type="text" name="surname"><br>
                 Podaj adres e-mail:<input type="email" name="mail"><br>
+                <button type="reset">Wyczyść</button>
                 <button type="submit" name="action2" value="button2">Prześlij</button>
             </form>
             <?php
@@ -204,15 +205,19 @@ $conn->close();
             
             $conn = mysqli_connect($servername, $username, $password, $dbname);
             
+            $imie = $_POST['name'];
+            $nazwisko = $_POST['surname'];
+            $mail = $_POST['mail'];
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
               }
               
               if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                  if ($_POST['action'] == 'button2') {
-                    # code...
+                  if ($_POST['action2'] == 'button2') {
+                   $data_add = mysqli_query($conn, "INSERT INTO `KLIENCI` (`ID`, `IMIE`, `NAZWISKO`, `MAIL`) VALUES (NULL, '$imie', '$nazwisko', '$mail')");
                   }
               }
+              
               $conn->close();
             ?>
         </div>
