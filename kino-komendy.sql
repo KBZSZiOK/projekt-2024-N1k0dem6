@@ -1,0 +1,152 @@
+CREATE DATABASE kino4tigr1; 
+
+CREATE TABLE FILMY (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    TYTUL varchar (255) NOT NULL,
+    REZYSER varchar (255) NOT NULL,
+    CZAS_TRWANIA_MIN bigint NOT NULL
+);
+
+CREATE TABLE RODZAJ_FILMU (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    NAZWA varchar (255)
+);
+
+CREATE TABLE FILMY_RODZAJ (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    FILMY_ID bigint NOT NULL,
+    RODZAJ_ID bigint NOT NULL,
+    
+    CONSTRAINT `filmy_fk` FOREIGN KEY (`FILMY_ID`)
+     REFERENCES FILMY(`ID`),
+    
+    CONSTRAINT `rodzaj_fk` FOREIGN KEY (`RODZAJ_ID`)
+    	REFERENCES RODZAJ_FILMU(`ID`) 
+);
+
+CREATE TABLE SALE (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    ILOSC_MIEJSC BIGINT NOT NULL
+);
+
+CREATE TABLE SEANSE (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    TERMIN DATETIME NOT NULL,
+    SALA_ID bigint NOT NULL,
+    FILM_ID bigint NOT NULL,
+    LICZBA_WOLNYCH_MIEJSC BIGINT NOT NULL,
+    
+    CONSTRAINT `sale_fk` FOREIGN KEY (`SALA_ID`)
+    	REFERENCES SALE(`ID`),
+    
+    CONSTRAINT `film_fk` FOREIGN KEY (`FILM_ID`)
+    	REFERENCES FILMY(`ID`)  
+);
+
+CREATE TABLE KLIENCI (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    IMIE varchar (255) NOT NULL,
+    NAZWISKO varchar (255) NOT NULL,
+    MAIL varchar (255) NOT NULL
+);
+
+CREATE TABLE SPRZEDAWCY (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    IMIE varchar (255) NOT NULL,
+    NAZWISKO varchar (255) NOT NULL
+);
+
+CREATE TABLE BILETY (
+    ID bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    SEANS_ID bigint NOT NULL,
+    SPRZEDAWCA_ID bigint NOT NULL,
+    KLIENT_ID bigint NOT NULL,
+    CENA bigint NOT NULL,
+    
+    CONSTRAINT `seans_fk` FOREIGN KEY (`SEANS_ID`)
+    	REFERENCES SEANSE(`ID`),
+    
+    CONSTRAINT `sprzedawca_fk` FOREIGN KEY (`SPRZEDAWCA_ID`)
+    	REFERENCES SPRZEDAWCY(`ID`),
+
+    CONSTRAINT `klient_fk` FOREIGN KEY (`KLIENT_ID`)
+    	REFERENCES KLIENCI(`ID`)   
+);
+
+
+
+
+INSERT INTO `SPRZEDAWCY` (`ID`, `IMIE`, `NAZWISKO`) VALUES 
+(NULL, 'Jan', 'Bogucki'),
+(NULL,'Michał', 'Więcek'),
+(NULL,'Bożena', 'Michalska'),
+(NULL,'Krystyna', 'Piętkiewicz'),
+(NULL,'Maciej', 'Stasiak');
+
+INSERT INTO `SALE` (`ID`, `ILOSC_MIEJSC`) VALUES 
+(NULL, 200),
+(NULL, 120),
+(NULL, 300),
+(NULL, 145),
+(NULL, 50);
+
+INSERT INTO `FILMY` (`ID`, `TYTUL`, `REZYSER`, `CZAS_TRWANIA_MIN`) VALUES 
+(NULL, 'Straszny Film', ' Malcolm D. Lee, Keenen Ivory Wayans, David Zucker', 122),
+(NULL, 'Szybcy i Wściekli : Tokio Drift', 'ustin Lin', 102),
+(NULL, 'Tuż po zmroku', 'Benjamin Brewer', 291),
+(NULL, 'Civil War', 'Alex Garland', 212),
+(NULL, 'Diabeł z Przodkowa', 'Cypek', 123);
+
+INSERT INTO `KLIENCI` (`ID`, `IMIE`, `NAZWISKO`, `MAIL`) VALUES 
+(NULL, 'Janusz', 'Męczykowski', 'janusz.meczykowski@wp.pl'),
+(NULL, 'Jarosław', 'Kuc', 'jarekcuk@wp.pl'),
+(NULL, 'Andrzej', 'Robinson', 'andrei2@o2.pl'),
+(NULL, 'Piotr','Jaszczur', 'detka@grzybno.pl'),
+(NULL, 'Kacper', 'Malinowski', 'malinakapi320@gmail.com');
+
+
+INSERT INTO `RODZAJ_FILMU` (`ID`, `NAZWA`) VALUES 
+(NULL, 'Horror'),
+(NULL, 'Komedia'),
+(NULL, 'Romantyczny'),
+(NULL, 'Obyczajowy'),
+(NULL, 'Akcji');
+
+INSERT INTO `FILMY_RODZAJ` (`ID`, `FILMY_ID`, `RODZAJ_ID`) VALUES 
+(NULL, 1, 1),
+(NULL, 2, 5),
+(NULL, 3, 1),
+(NULL, 4, 5),
+(NULL, 5, 1);
+
+
+INSERT INTO `SEANSE` (`ID`, `TERMIN`, `SALA_ID`, `FILM_ID`, `LICZBA_WOLNYCH_MIEJSC`) VALUES 
+(NULL, "2024-12-13 20:23:44", 3, 2, 95 ),
+(NULL, "2024-12-14 22:27:14", 4, 1, 20 ),
+(NULL, "2024-12-15 19:23:34", 1, 3, 25 ),
+(NULL, "2024-12-16 13:15:59", 2, 5, 70 ),
+(NULL, "2024-10-15 14:25:50", 5, 4, 12 );
+
+INSERT INTO `BILETY` (`ID`, `SEANS_ID`, `SPRZEDAWCA_ID`, `KLIENT_ID`, `CENA`) VALUES 
+(NULL, 1, 2, 4, 25),
+(NULL, 3, 3, 5, 17),
+(NULL, 2, 1, 1, 21),
+(NULL, 5, 5, 2, 12),
+(NULL, 4, 4, 3, 43);
+
+
+-- Zapytania do bazy:
+SELECT TYTUL, REZYSER
+FROM FILMY
+GROUP BY TYTUL;
+
+SELECT ID, TYTUL, REZYSER
+FROM FILMY
+GROUP BY TYTUL ORDER BY ID DESC;
+
+SELECT FILMY_RODZAJ.ID, FILMY.TYTUL, RODZAJ_FILMU.NAZWA
+FROM FILMY_RODZAJ INNER JOIN FILMY ON FILMY_RODZAJ.FILMY_ID = FILMY.ID INNER JOIN RODZAJ_FILMU ON FILMY_RODZAJ.ID = RODZAJ_FILMU.ID GROUP BY FILMY.TYTUL
+ORDER BY RODZAJ_FILMU.NAZWA  ASC;
+
+
+

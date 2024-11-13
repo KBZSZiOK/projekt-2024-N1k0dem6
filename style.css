@@ -11,12 +11,17 @@ header {
     color: black;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    width: 100vw;
 }
 
 footer {
     background-color: goldenrod;
     color: black;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 #formularz {
@@ -91,4 +96,10 @@ footer {
     display: flex;
     justify-content: center;
     align-self: center;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
