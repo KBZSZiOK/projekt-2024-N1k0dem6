@@ -195,11 +195,11 @@ $conn->close();
         <div id="forms">
           <p><b>UWAGA! Pierwsze 100 osób, które się zarejestrują mają 3 seanse w cenie 1.</b></p><br>
             <form method="post">
-                Podaj imię:<input type="text" name="name"><br>
-                Podaj nazwisko:<input type="text" name="surname"><br>
-                Podaj adres e-mail:<input type="email" name="mail"><br>
-                <button type="reset">Wyczyść</button>
-                <button type="submit" name="action2" value="button2">Prześlij</button>
+                Podaj imię:<input type="text" class="formatka" name="name"><br><br>
+                Podaj nazwisko:<input type="text" class="formatka" name="surname"><br><br>
+                Podaj adres e-mail:<input type="email" class="formatka" name="mail"><br><br>
+                <button type="reset" class="formatkaPrzycisk">Wyczyść</button>
+                <button type="submit" class="formatkaPrzycisk" name="action2" value="button2">Prześlij</button>
             </form>
             <?php
             $servername = "localhost";
@@ -227,11 +227,11 @@ $conn->close();
         </div>
         </section>
         
-        <section id="text">
+        <section id="description">
             <p>Jesteśmy niedawno otworzonym kinem ,w którym można doznać dreszczyku emocji, ponieważ specjalizujemy się głównie w emitowaniu horrorów &#128561; &#128561; &#128561;</p>
         </section>
     
-        <footer id="prawo"><b>©KINO YASON 2024</b></footer>
-<script src="skrypt.js"></script>
+        <footer id="prawo"><b id="napis">©KINO YASON 2024</b></footer>
+<script src="betterTextAnimation.js"></script>
 </body>
 </html>
