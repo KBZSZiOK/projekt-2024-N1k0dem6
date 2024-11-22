@@ -97,13 +97,15 @@ nav {
         color: black;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+        position: fixed;
+        width: 100vw;
+        height: 18vh;
     }
     footer {
         background-color: goldenrod;
         color: black;
-        text-align: center;
-        flex-wrap: wrap;
+        position: fixed;
+        bottom: 0;
         width: 100vw;
     }
     #formularz {
@@ -117,5 +119,12 @@ nav {
         flex-wrap: wrap;
         width: 100vw;
         height: 100vh;
+    }
+    #tableView,
+    #forms {
+        display: flex;
+        justify-content: center;
+        align-self: flex-end;
+        flex-wrap: wrap;
     }
 }
